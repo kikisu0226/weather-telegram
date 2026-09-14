@@ -3,38 +3,16 @@ import requests
 
 LATITUDE = 25.0330
 LONGITUDE = 121.5654
-
 THRESHOLD = 30
 
-def get_rain_probability():
+def get_weather():
 url = "https://api.open-meteo.com/v1/forecast"
+print("Open-Meteo URL:", url)
+return True
 
-```
-params = {
-    "latitude": LATITUDE,
-    "longitude": LONGITUDE,
-    "daily": "precipitation_probability_max",
-    "timezone": "Asia/Taipei",
-    "forecast_days": 1
-}
+print("Python 程式開始執行")
+get_weather()
 
-response = requests.get(url, params=params, timeout=10)
-response.raise_for_status()
-
-data = response.json()
-
-date = data["daily"]["time"][0]
-
-rain_probability = data["daily"][
-    "precipitation_probability_max"
-][0]
-
-return date, rain_probability
-```
-
-def send_telegram(message):
-token = os.environ["TELEGRAM_BOT_TOKEN"]
-chat_id = os.environ["TELEGRAM_CHAT_ID"]
 
 ```
 url = f"https://api.telegram.org/bot{token}/sendMessage"
