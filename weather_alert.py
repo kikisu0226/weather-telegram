@@ -6,7 +6,7 @@ LONGITUDE = 121.5654
 THRESHOLD = 30
 
 def get_weather():
-url = "https://api.open-meteo.com/v1/forecast"
+    url = "https://api.open-meteo.com/v1/forecast"
 print("Open-Meteo URL:", url)
 return True
 
