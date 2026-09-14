@@ -3,7 +3,6 @@ import requests
 
 LATITUDE = 25.0330
 LONGITUDE = 121.5654
-
 THRESHOLD = 30
 
 def get_weather():
@@ -60,7 +59,6 @@ print(f"最高降雨機率：{rain_probability}%")
 print(f"通知門檻：{THRESHOLD}%")
 
 if rain_probability > THRESHOLD:
-
     message = (
         "☔ 今日下雨提醒！\n\n"
         f"日期：{date}\n"
@@ -69,7 +67,6 @@ if rain_probability > THRESHOLD:
     )
 
     send_telegram(message)
-
     print("Telegram 通知發送成功！")
 
 else:
@@ -79,4 +76,5 @@ else:
 
 if **name** == "**main**":
 main()
+
 
