@@ -9,7 +9,7 @@ THRESHOLD = 30
 def get_weather():
     url = "https://api.open-meteo.com/v1/forecast"
 
-```
+```text
 params = {
     "latitude": LATITUDE,
     "longitude": LONGITUDE,
