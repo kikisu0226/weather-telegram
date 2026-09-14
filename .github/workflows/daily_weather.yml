@@ -1,33 +1,89 @@
 name: Daily Weather Alert
 
-on:
-  schedule:
-    # 每天台灣時間早上 7:00
-    - cron: "0 23 * * *"
+# ==========================================
 
-  # 可以手動執行
-  workflow_dispatch:
+# 自動執行時間
+
+# ==========================================
+
+on:
+
+schedule:
+
+```
+# 每天台灣時間下午 2:15
+#
+# GitHub Actions 使用 UTC
+# 台灣時間 = UTC + 8
+#
+# 台灣 14:15
+# ↓
+# UTC 06:15
+#
+- cron: "15 6 * * *"
+```
+
+# 可以在 GitHub Actions 手動執行
+
+workflow_dispatch:
+
+# ==========================================
+
+# 工作內容
+
+# ==========================================
 
 jobs:
-  weather-check:
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+weather-check:
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+```
+runs-on: ubuntu-latest
 
-      - name: Install Dependencies
-        run: |
-          pip install -r requirements.txt
+steps:
 
-      - name: Run Weather Alert
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          python weather_alert.py
+  # --------------------------------------
+  # 下載 Repository 程式碼
+  # --------------------------------------
+
+  - name: Checkout Repository
+    uses: actions/checkout@v4
+
+
+  # --------------------------------------
+  # 設定 Python
+  # --------------------------------------
+
+  - name: Setup Python
+    uses: actions/setup-python@v5
+
+    with:
+      python-version: "3.12"
+
+
+  # --------------------------------------
+  # 安裝 Python 套件
+  # --------------------------------------
+
+  - name: Install Dependencies
+    run: |
+      pip install -r requirements.txt
+
+
+  # --------------------------------------
+  # 執行 Python
+  # --------------------------------------
+
+  - name: Run Weather Alert
+
+    env:
+
+      # 從 GitHub Secrets 取得 Telegram Token
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+      # 從 GitHub Secrets 取得 Telegram Chat ID
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+    run: |
+      python weather_alert.py
+```
